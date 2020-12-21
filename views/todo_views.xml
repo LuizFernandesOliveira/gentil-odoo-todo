@@ -1,0 +1,51 @@
+<odoo>
+  <data>
+    <!-- view for todo.list -->
+    <record model="ir.ui.view" id="todo.list">
+      <field name="name">todo.list</field>
+      <field name="model">todo.list</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="list_name"/>
+          <field name="partner_id"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- action for todo.list -->
+    <record model="ir.actions.act_window" id="todo.action_list">
+      <field name="name">Tarefas</field>
+      <field name="res_model">todo.list</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+          Criar nova tarefa
+        </p>
+      </field>
+    </record>
+
+    <!-- action and view for res.partner -->
+    <record id="todo.action_partner" model="ir.actions.act_window">
+        <field name="name">Parceiros</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form,activity</field>
+        <field name="search_view_id" ref="base.view_res_partner_filter"/>
+        <field name="context">{'default_is_company': True}</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Cadastrar novo Parceiro
+          </p>
+        </field>
+    </record>
+
+    <!-- Top menu item -->
+    <menuitem name="todo" id="todo.menu_root"/>
+
+    <!-- menu Tarefas -->
+    <menuitem name="Tarefas" id="todo.tarefas" parent="todo.menu_root" action="todo.action_list"/>
+
+    <!-- menu Parceiros -->
+    <menuitem name="Parceiros" id="todo.parceiros" parent="todo.menu_root" action="todo.action_partner"/>
+  </data>
+</odoo>
